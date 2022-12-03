@@ -47,6 +47,7 @@ func main() {
 			_, _ = fmt.Scanf("%s\n", &userName)
 			//调用一个UserProcess实例,完成注册请求
 			up := &process.UserProcess{}
+
 			_ = up.Register(userId, userPwd, userName)
 
 		case 3:
