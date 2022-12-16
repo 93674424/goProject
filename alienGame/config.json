@@ -1,0 +1,30 @@
+{
+  "screenWidth": 640,
+  "screenHeight": 480,
+  "title": "外星人入侵",
+  "bgColor": {
+    "r": 230,
+    "g": 230,
+    "b": 230,
+    "a": 255
+  },
+  "shipSpeedFactor": 3,
+
+  "bulletWidth": 3,
+  "bulletHeight": 15,
+  "bulletSpeedFactor": 2,
+  "maxBulletNum": 10,
+  "bulletInterval": 50,
+  "bulletColor": {
+    "r": 80,
+    "g": 80,
+    "b": 80,
+    "a": 255
+  },
+
+  "alienSpeedFactor": 0.5,
+  "titleFontSize": 10,
+  "fontSize": 5,
+  "smallFontSize": 3
+}
+
