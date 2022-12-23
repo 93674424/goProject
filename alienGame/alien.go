@@ -12,6 +12,12 @@ type Alien struct {
 	speedFactor float64
 }
 
+func (alien *Alien) Draw(screen *ebiten.Image) {
+	op := &ebiten.DrawImageOptions{}
+	op.GeoM.Translate(alien.gameObject.x, alien.gameObject.y)
+	screen.DrawImage(alien.image, op)
+}
+
 func NewAlien(cfg *Config) *Alien {
 	path := "D:\\IDEA Project\\goDemo\\src\\alienGame\\alien.png"
 	img, _, err := ebitenutil.NewImageFromFile(path)
@@ -37,8 +43,4 @@ func (alien *Alien) outOfScreen(cfg *Config) bool {
 		return true
 	}
 	return false
-}
-
-func (g *Game) addAlien(alien *Alien) {
-	g.aliens[alien] = struct{}{}
 }

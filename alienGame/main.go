@@ -8,17 +8,6 @@ import (
 	"log"
 )
 
-func (g *Game) CheckCollision() {
-	for alien := range g.aliens {
-		for bullet := range g.bullets {
-			if CheckCollision(&alien.gameObject, &bullet.gameObject) {
-				delete(g.aliens, alien)
-				delete(g.bullets, bullet)
-			}
-		}
-	}
-}
-
 func (g *Game) Update() error {
 	switch g.mode {
 	case ModeTitle:
@@ -109,24 +98,6 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	}
 	//显示
 	ebitenutil.DebugPrint(screen, g.input.msg)
-}
-
-func (ship *Ship) Draw(screen *ebiten.Image) {
-	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Translate(ship.gameObject.x, ship.gameObject.y)
-	screen.DrawImage(ship.image, op)
-}
-
-func (bullet *Bullet) Draw(screen *ebiten.Image) {
-	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Translate(bullet.gameObject.x, bullet.gameObject.y)
-	screen.DrawImage(bullet.image, op)
-}
-
-func (alien *Alien) Draw(screen *ebiten.Image) {
-	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Translate(alien.gameObject.x, alien.gameObject.y)
-	screen.DrawImage(alien.image, op)
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {

@@ -30,3 +30,14 @@ func CheckCollision(entityA, entityB Entity) bool {
 
 	return false
 }
+
+func (g *Game) CheckCollision() {
+	for alien := range g.aliens {
+		for bullet := range g.bullets {
+			if CheckCollision(&alien.gameObject, &bullet.gameObject) {
+				delete(g.aliens, alien)
+				delete(g.bullets, bullet)
+			}
+		}
+	}
+}

@@ -11,12 +11,14 @@ type Bullet struct {
 	speedFactor float64
 }
 
-func (bullet *Bullet) outOfScreen() bool {
-	return bullet.gameObject.y < -float64(bullet.gameObject.height)
+func (bullet *Bullet) Draw(screen *ebiten.Image) {
+	op := &ebiten.DrawImageOptions{}
+	op.GeoM.Translate(bullet.gameObject.x, bullet.gameObject.y)
+	screen.DrawImage(bullet.image, op)
 }
 
-func (g *Game) addBullet(bullet *Bullet) {
-	g.bullets[bullet] = struct{}{}
+func (bullet *Bullet) outOfScreen() bool {
+	return bullet.gameObject.y < -float64(bullet.gameObject.height)
 }
 
 func NewBullet(cfg *Config, ship *Ship) *Bullet {

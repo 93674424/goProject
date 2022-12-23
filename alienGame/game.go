@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/hajimehoshi/ebiten/v2/examples/resources/fonts"
 	"golang.org/x/image/font"
 	"golang.org/x/image/font/opentype"
@@ -18,7 +17,6 @@ const (
 var (
 	titleArcadeFont font.Face
 	arcadeFont      font.Face
-	_               font.Face
 )
 
 type Game struct {
@@ -30,11 +28,6 @@ type Game struct {
 	aliens    map[*Alien]struct{}
 	failCount int
 	overMsg   string
-}
-
-type Ship struct {
-	image      *ebiten.Image
-	gameObject GameObject
 }
 
 type GameObject struct {
@@ -65,6 +58,14 @@ func (gameObj *GameObject) X() float64 {
 
 func (gameObj *GameObject) Y() float64 {
 	return gameObj.y
+}
+
+func (g *Game) addBullet(bullet *Bullet) {
+	g.bullets[bullet] = struct{}{}
+}
+
+func (g *Game) addAlien(alien *Alien) {
+	g.aliens[alien] = struct{}{}
 }
 
 func (g *Game) init() {
@@ -118,27 +119,6 @@ func (g *Game) CreateAliens() {
 			g.addAlien(alien)
 		}
 	}
-}
-
-func NewShip(screenWidth, screenHeight int) *Ship {
-	path := "D:\\IDEA Project\\goDemo\\src\\alienGame\\ship.png"
-	img, _, err := ebitenutil.NewImageFromFile(path)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	width, height := img.Size()
-	ship := &Ship{
-		image: img,
-		gameObject: GameObject{
-			width:  width,
-			height: height,
-			x:      float64(screenWidth-width) / 2,
-			y:      float64(screenHeight - height),
-		},
-	}
-
-	return ship
 }
 
 func NewGame() *Game {
